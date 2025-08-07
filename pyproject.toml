@@ -11,6 +11,7 @@ requires-python = ">=3.12"
 dependencies = [
     "fastapi[standard] (>=0.116.1,<0.117.0)",
     "mangum (>=0.19.0,<0.20.0)",
+    "pydantic (>=2.11.7,<3.0.0)",
 ]
 
 
