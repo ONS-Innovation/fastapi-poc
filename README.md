@@ -7,6 +7,7 @@ A PoC to investigate FastAPI and its deployment to AWS. This forms a "blueprint"
   - [Contents](#contents)
   - [Overview](#overview)
   - [Scope](#scope)
+  - [Project Structure](#project-structure)
 
 ## Overview
 
@@ -28,3 +29,19 @@ When it comes to building the actual database API, the following will need to be
 - Further linting and code quality checks
 - MkDocs for technical documentation
 - Concourse integration for CI/CD
+
+## Project Structure
+
+The project is structured as follows:
+
+```
+fastapi-poc/
+└── src/                         # Source code for the FastAPI application
+    ├── main.py                  # Entry point for the FastAPI application
+    └── api/                     # Contains API routes and logic
+        └── v0/                  # Versioned API routes
+            ├── api.py           # Main API router
+            └── endpoints/       # Contains individual API endpoint definitions
+                ├── projects.py      # Project-related API endpoints
+                └── technologies.py  # Technology-related API endpoints
+```
