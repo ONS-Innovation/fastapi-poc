@@ -12,6 +12,8 @@ A PoC to investigate FastAPI and its deployment to AWS. This forms a "blueprint"
   - [Deployment to AWS](#deployment-to-aws)
     - [Push Docker Image to ECR](#push-docker-image-to-ecr)
     - [Terraform](#terraform)
+      - [Terraform Variables](#terraform-variables)
+      - [Applying Terraform Configuration](#applying-terraform-configuration)
       - [Cleanup](#cleanup)
 
 ## Overview
@@ -68,16 +70,10 @@ To get started with this FastAPI PoC, follow these steps:
   poetry install
   ```
 
-3. Change to the `src` directory.
+3. Run the FastAPI application.
 
   ```bash
-  cd src
-  ```
-
-4. Run the FastAPI application.
-
-  ```bash
-  uvicorn main:app --reload
+  uvicorn src.main:app --reload
   ```
 
 5. Open your browser and navigate to `http://localhost:8000/docs` to view the API documentation and test the endpoints.
@@ -123,12 +119,55 @@ To deploy the FastAPI application to AWS, we need to first build a Docker image 
 
 ### Terraform
 
+Terraform is used to manage the AWS infrastructure required to run the FastAPI application. The `terraform/` directory contains the following:
+
+```
+terraform/
+├── main.tf                   # Main Terraform configuration file
+├── outputs.tf                # Terraform outputs
+├── provider.tf               # Provider configuration (Terraform version, default tags)
+├── variables.tf              # Variables definition
+├── env/                      # Environment-specific configurations
+│   ├── dev/                  # Development environment
+│   │   ├── backend-dev.tfbackend   # Backend config for development
+│   │   └── dev.tfvars.txt          # Example variables file
+│   └── prod/                 # Production environment
+│       └── backend-prod.tfbackend  # Backend config for production
+├── lambda/                   # Lambda function configurations
+│   └── ...                   # (Lambda-related files)
+└── api_gateway/              # API Gateway configurations
+    └── ...                   # (API Gateway-related files)
+```
+
+The project uses modules to manage the infrastructure, with separate modules for the Lambda function and API Gateway.
+
+#### Terraform Variables
+
+The following Terraform variables are used to configure the API deployment:
+
+- `image_tag`: The tag of the Docker image to be deployed (e.g., `latest`).
+
+A full list of variables can be found in the `variables.tf` file located in the `terraform/` directory. 
+
+These variables can be configured using a `.tfvars` file and adding the `-var-file=<path-to-tfvars-file>` option when running Terraform.
+
+For example:
+
+```bash
+terraform refresh -var-file="env/<env>/terraform.tfvars"
+terraform apply -var-file="env/<env>/terraform.tfvars"
+```
+
+See `/env/dev/example.tfvars.txt` for an example of how to set up the variables.
+
+#### Applying Terraform Configuration
+
 Now that the Docker image is in ECR, we can use Terraform to resource the necessary AWS infrastructure to run the FastAPI application.
 
-1. Change to the `terraform/service` directory:
+1. Change to the `terraform/` directory:
 
   ```bash
-  cd terraform/service
+  cd terraform/
   ```
 
 2. Initialize Terraform:

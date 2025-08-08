@@ -4,7 +4,7 @@ import uvicorn
 from mangum import Mangum
 
 # Import API routers for different versions
-from api.v0.api import router as api_v0_router
+from src.api.v0.api import router as api_v0_router
 
 app = FastAPI()
 

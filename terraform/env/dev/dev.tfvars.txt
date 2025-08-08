@@ -1,0 +1,4 @@
+# Example .tfvars file
+# To use this, remove `.txt` from the filename and fill in variables accordingly.
+
+image_tag=latest

@@ -1,3 +1,6 @@
+# Exclude ./terraform/env directories, which are used to store Terraform state and configuration files.
+!**/terraform/env/*
+
 # Byte-compiled / optimized / DLL files
 __pycache__/
 *.py[codz]
@@ -138,9 +141,7 @@ celerybeat.pid
 .env
 .envrc
 .venv
-env/
 venv/
-ENV/
 env.bak/
 venv.bak/
 
