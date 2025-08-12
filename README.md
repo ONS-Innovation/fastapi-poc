@@ -11,10 +11,11 @@ A PoC to investigate FastAPI and its deployment to AWS. This forms a "blueprint"
   - [Getting Started](#getting-started)
   - [Deployment to AWS](#deployment-to-aws)
     - [Push Docker Image to ECR](#push-docker-image-to-ecr)
-    - [Terraform](#terraform)
-      - [Terraform Variables](#terraform-variables)
-      - [Applying Terraform Configuration](#applying-terraform-configuration)
-      - [Cleanup](#cleanup)
+  - [Terraform](#terraform)
+    - [Terraform Variables](#terraform-variables)
+    - [Applying Terraform Configuration](#applying-terraform-configuration)
+    - [Cleanup](#cleanup)
+    - [IP Whitelisting to Access API Gateway](#ip-whitelisting-to-access-api-gateway)
 
 ## Overview
 
@@ -117,7 +118,7 @@ To deploy the FastAPI application to AWS, we need to first build a Docker image 
   docker push <your-account-id>.dkr.ecr.<your-region>.amazonaws.com/<repository-name>:<tag>
   ```
 
-### Terraform
+## Terraform
 
 Terraform is used to manage the AWS infrastructure required to run the FastAPI application. The `terraform/` directory contains the following:
 
@@ -141,7 +142,7 @@ terraform/
 
 The project uses modules to manage the infrastructure, with separate modules for the Lambda function and API Gateway.
 
-#### Terraform Variables
+### Terraform Variables
 
 The following Terraform variables are used to configure the API deployment:
 
@@ -160,7 +161,7 @@ terraform apply -var-file="env/<env>/terraform.tfvars"
 
 See `/env/dev/example.tfvars.txt` for an example of how to set up the variables.
 
-#### Applying Terraform Configuration
+### Applying Terraform Configuration
 
 Now that the Docker image is in ECR, we can use Terraform to resource the necessary AWS infrastructure to run the FastAPI application.
 
@@ -196,7 +197,7 @@ Now that the Docker image is in ECR, we can use Terraform to resource the necess
 
 6. Once the deployment is complete, you can access the FastAPI application using the URL provided in the output of the `terraform apply` command.
 
-#### Cleanup
+### Cleanup
 
 To clean up the resources created by Terraform, you can run:
 
@@ -205,3 +206,13 @@ terraform destroy
 ```
 
 This will remove all the AWS resources created by the Terraform configuration.
+
+### IP Whitelisting to Access API Gateway
+
+Once the terraform configuration has been applied, you will need to whitelist your IP address to access the API Gateway.
+
+This is enforced using an AWS WAF rule that allows access only from specific IP addresses. If you try to access the API Gateway without whitelisting your IP, you will receive a `403 Forbidden` error.
+
+Within the AWS console, navigate to `WAF & Shield` > `IP sets` > `fastapi-gateway-ip-set` and add your IP address to the set.
+
+Once your IP address is added, you should be able to access the API.
