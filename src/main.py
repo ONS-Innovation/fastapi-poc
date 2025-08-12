@@ -6,7 +6,10 @@ from mangum import Mangum
 # Import API routers for different versions
 from src.api.v0.api import router as api_v0_router
 
-app = FastAPI()
+# Set root path to "/dev"
+# This is to match the API Gateway configuration
+# TODO: This needs to be set dynamically based on the environment
+app = FastAPI(root_path="/dev")
 
 app.add_middleware(
     CORSMiddleware,
