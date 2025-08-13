@@ -7,6 +7,8 @@ A PoC to investigate FastAPI and its deployment to AWS. This forms a "blueprint"
   - [Contents](#contents)
   - [Overview](#overview)
   - [Scope](#scope)
+  - [Documentation and Write Up](#documentation-and-write-up)
+    - [Documentation Deployment](#documentation-deployment)
   - [Project Structure](#project-structure)
   - [Getting Started](#getting-started)
   - [Deployment to AWS](#deployment-to-aws)
@@ -37,6 +39,39 @@ When it comes to building the actual database API, the following will need to be
 - Further linting and code quality checks
 - MkDocs for technical documentation
 - Concourse integration for CI/CD
+
+## Documentation and Write Up
+
+This repository uses MkDocs for documentation and write-up purposes.
+
+The documentation is located in the `docs/` directory and can be served using the following:
+
+1. Create and activate a virtual environment:
+
+  ```bash
+  python3 -m venv venv
+  source venv/bin/activate
+  ```
+
+2. Install dependencies
+
+  ```bash
+  poetry install --only docs
+  ```
+
+3. Serve the documentation
+
+  ```bash
+  mkdocs serve
+  ```
+
+This will start a local development server and you can view the documentation at `http://localhost:8000`.
+
+### Documentation Deployment
+
+This repository hosts its documentation using GitHub Pages. The documentation is built and deployed using a GitHub Action that is triggered on every push to the `main` branch.
+
+This is available within [`.github/workflows/deploy_mkdocs.yml`](.github/workflows/deploy_mkdocs.yml).
 
 ## Project Structure
 
