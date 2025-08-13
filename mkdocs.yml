@@ -5,6 +5,10 @@ repo_name: fastapi-poc
 
 nav:
   - Home: 'index.md'
+  - Technology: 'technology.md'
+  - Infrastructure: 'infrastructure.md'
+  - Security: 'security.md'
+  - Further Development: 'further_development.md'
 theme:
   name: material
   language: en
