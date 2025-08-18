@@ -144,6 +144,8 @@ resource "aws_api_gateway_deployment" "fastapi_gateway_deployment" {
         aws_api_gateway_integration.projects_post_integration,
         aws_api_gateway_integration.projects_delete_integration
     ]
+
+    // TODO: In the production API, this will need a triggers block to enable auto deployment.
 }
 
 resource "aws_api_gateway_stage" "fastapi_gateway_stage" {
