@@ -1,7 +1,5 @@
 # FastAPI PoC Documentation
 
-**Note: This documentation is still being put together and is incomplete.**
-
 ## Overview
 
 This documentation provides an overview of the FastAPI Proof of Concept (PoC). For a full overview of the project and its scope, please see the repository's `README.md` file.
