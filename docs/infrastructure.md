@@ -18,8 +18,7 @@ The infrastructure deployed by the tool includes the following:
 
 See the diagram below for a visual representation of the infrastructure components and their interactions.
 
-<!-- TODO: Make Diagram -->
-![Infrastructure Diagram](./assets/infrastructure-diagram.png)
+![Infrastructure Diagram](./assets/infrastructure-diagram.drawio.png)
 
 ### API Gateway
 
@@ -31,8 +30,7 @@ The endpoints that should be defined within API Gateway are those which need res
 
 See the diagram below for a visual representation of the API Gateway configuration.
 
-<!-- TODO: Make Diagram -->
-![API Gateway Diagram](./assets/api-gateway-diagram.png)
+![API Gateway Diagram](./assets/api-gateway-diagram.drawio.png)
 
 #### Authorizers: Cognito
 
@@ -72,5 +70,4 @@ The reason why we have not pursued this option is because API Gateway seems to b
 
 Below provides an example diagram of the Fargate + Load Balancer setup.
 
-<!-- TODO: Make Diagram -->
-![Fargate + Load Balancer Diagram](./assets/fargate-load-balancer-diagram.png)
+![Fargate + Load Balancer Diagram](./assets/fargate-load-balancer-diagram.drawio.png)
